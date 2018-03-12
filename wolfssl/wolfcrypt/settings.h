@@ -162,6 +162,9 @@
 /* Uncomment next line if building for using XILINX */
 /* #define WOLFSSL_XILINX */
 
+/* Uncomment next line if building for using Apache mynewt */
+/* #define WOLFSSL_APACHE_MYNEWT */
+
 #include <wolfssl/wolfcrypt/visibility.h>
 
 #ifdef WOLFSSL_USER_SETTINGS
@@ -1184,6 +1187,43 @@ extern void uITRON4_free(void *p) ;
         #define WOLFSSL_NOSHA3_512
     #endif
 #endif /*(WOLFSSL_XILINX_CRYPT)*/
+
+#if defined(WOLFSSL_APACHE_MYNEWT)
+    #if !defined(SIZEOF_LONG)
+        #define SIZEOF_LONG 4
+    #endif
+    #if !defined(SIZEOF_LONG_LONG)
+        #define SIZEOF_LONG_LONG 8
+    #endif
+    #if (__BYTE_ORDER__ == __ORDER_BIG_ENDIAN__)
+        #define BIG_ENDIAN_ORDER
+    #else
+        #undef  BIG_ENDIAN_ORDER
+        #define LITTLE_ENDIAN_ORDER
+    #endif
+    #define NO_WRITEV
+    #define WOLFSSL_USER_IO
+    #ifndef HAVE_FILESYSTEM
+        #ifndef NO_FILESYSTEM
+            #define NO_FILESYSTEM
+        #endif
+    #endif
+    #define SINGLE_THREADED
+    #define NO_DEV_RANDOM
+    #define NO_FILESYSTEM // TODO: mynewt can be on/off filesystem
+    #define NO_WOLFSSL_DIR
+    #define NO_ERROR_STRINGS
+    #define HAVE_ECC
+    // #define NO_DH
+    #define NO_SESSION_CACHE
+    #define USE_SLOW_SHA
+    #define NO_WOLFSSL_SERVER
+    #define NO_ERROR_STRINGS
+    //#define USE_FAST_MATH
+    //#define USER_TIME
+    // #define WC_NO_HARDEN // TODO:
+
+#endif /*(WOLFSSL_APACHE_MYNEWT)*/
 
 #ifdef WOLFSSL_IMX6
     #ifndef SIZEOF_LONG_LONG
