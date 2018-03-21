@@ -1189,6 +1189,7 @@ extern void uITRON4_free(void *p) ;
 #endif /*(WOLFSSL_XILINX_CRYPT)*/
 
 #if defined(WOLFSSL_APACHE_MYNEWT)
+    #include "os/os_malloc.h"
     #if !defined(SIZEOF_LONG)
         #define SIZEOF_LONG 4
     #endif
@@ -1222,6 +1223,10 @@ extern void uITRON4_free(void *p) ;
     //#define USE_FAST_MATH
     //#define USER_TIME
     // #define WC_NO_HARDEN // TODO:
+    #define XMALLOC_USER
+    #define XMALLOC(sz, heap, type)     os_malloc(sz)
+    #define XREALLOC(p, sz, heap, type) os_realloc(p, sz)
+    #define XFREE(p, heap, type)        os_free(p)
 
 #endif /*(WOLFSSL_APACHE_MYNEWT)*/
 
