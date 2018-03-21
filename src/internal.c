@@ -5983,6 +5983,18 @@ ProtocolVersion MakeDTLSv1_2(void)
         return (word32)(uTaskerSystemTick / TICK_RESOLUTION);
     }
 
+#elif defined(WOLFSSL_APACHE_MYNEWT)
+
+    #include "os/os_time.h"
+    word32 LowResTimer(void)
+    {
+        word32 now;
+        struct os_timeval tv;
+        os_gettimeofday(&tv, NULL);
+        now = (word32)tv.tv_sec;
+        return now;
+    }
+
 #else
     /* Posix style time */
     #ifndef USER_TIME

@@ -18,7 +18,7 @@
 #
 
 ### Package: targets/wolfcrypttest_sim
-pkg.name: "wolfcrypttest_sim"
+pkg.name: "targets/wolfcrypttest_sim"
 pkg.type: "target"
 pkg.description: 
 pkg.author: 
