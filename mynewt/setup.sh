@@ -14,6 +14,11 @@ if [ $# -ne 1 ]; then
 fi
 MYNEWT_PROJECT=$1
 
+if [ ! -d $MYNEWT_PROJECT ] || [ ! -f $MYNEWT_PROJECT/project.yml ]; then
+    echo "target directory is not mynewt project.: $MYNEWT_PROJECT"
+    exit 1
+fi
+
 # create wolfssl pkgs to mynewt project
 pushd $MYNEWT_PROJECT > /dev/null
 echo "create crypto/wolfssl pkg"
