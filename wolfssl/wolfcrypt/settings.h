@@ -1211,17 +1211,15 @@ extern void uITRON4_free(void *p) ;
     #endif
     #define SINGLE_THREADED
     #define NO_DEV_RANDOM
-    #define NO_FILESYSTEM // TODO: mynewt can be on/off filesystem
+    #define NO_FILESYSTEM
+    #define NO_DH
     #define NO_WOLFSSL_DIR
     #define NO_ERROR_STRINGS
     #define HAVE_ECC
-    // #define NO_DH
     #define NO_SESSION_CACHE
     #define USE_SLOW_SHA
     #define NO_WOLFSSL_SERVER
     #define NO_ERROR_STRINGS
-    //#define USE_FAST_MATH
-    //#define USER_TIME
     // #define WC_NO_HARDEN // TODO:
     #define XMALLOC_USER
     #define XMALLOC(sz, heap, type)     os_malloc(sz)

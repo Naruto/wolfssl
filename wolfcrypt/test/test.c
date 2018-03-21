@@ -172,6 +172,17 @@
     #include "fsl_debug_console.h"
     #undef printf
     #define printf PRINTF
+#elif defined(WOLFSSL_APACHE_MYNEWT)
+    #include <assert.h>
+    #include <string.h>
+    #include "sysinit/sysinit.h"
+    #include "os/os.h"
+    #ifdef ARCH_sim
+    #include "mcu/mcu_sim.h"
+    #endif
+    #include "os/os_time.h"
+    // #undef printf
+    // #define printf
 #else
     #include <stdio.h>
 #endif
@@ -194,6 +205,9 @@
     void BSP_Ser_Printf (CPU_CHAR* format, ...);
     #undef printf
     #define printf BSP_Ser_Printf
+#endif
+
+#ifdef WOLFSSL_APACHE_MYNEWT
 #endif
 
 #include "wolfcrypt/test/test.h"
@@ -959,6 +973,22 @@ initDefaultName();
     int main(int argc, char** argv)
     {
         func_args args;
+
+#ifdef WOLFSSL_APACHE_MYNEWT
+        #ifdef ARCH_sim
+        mcu_sim_parse_args(argc, argv);
+        #endif
+        sysinit();
+
+        /* set dummy wallclock time. */
+        struct os_timeval utctime;
+        struct os_timezone tz;
+        utctime.tv_sec = 1521725159; /* dummy time: 2018-03-22T13:25:59+00:00 */
+        utctime.tv_usec = 0;
+        tz.tz_minuteswest = 0;
+        tz.tz_dsttime = 0;
+        os_settimeofday(&utctime, &tz);
+#endif
 
 #ifdef HAVE_WNR
         if (wc_InitNetRandom(wnrConfigFile, NULL, 5000) != 0) {

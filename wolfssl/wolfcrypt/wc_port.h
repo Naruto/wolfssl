@@ -89,6 +89,8 @@
 #elif defined(INTIME_RTOS)
     #include <rt.h>
     #include <io.h>
+#elif defined(WOLFSSL_APACHE_MYNEWT)
+    /* do nothing */
 #else
     #ifndef SINGLE_THREADED
         #define WOLFSSL_PTHREADS
@@ -406,7 +408,12 @@ WOLFSSL_API int wolfCrypt_Cleanup(void);
     #include <windows.h>
     #define XTIME(t1)       windows_time((t1))
     #define WOLFSSL_GMTIME
-
+#elif defined(WOLFSSL_APACHE_MYNEWT)
+    #include "os/os_time.h"
+    #define XTIME(t1)       mynewt_time((t1))
+    #define WOLFSSL_GMTIME
+    #define USE_WOLF_TM
+    #define USE_WOLF_TIME_T
 #else
     /* default */
     /* uses complete <time.h> facility */
