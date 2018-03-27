@@ -25,6 +25,7 @@ pkg.homepage: "http://your-url.org/"
 pkg.keywords:
 pkg.deps:
     - crypto/wolfssl
-
+    - "@apache-mynewt-core/kernel/os"
+    - "@apache-mynewt-core/sys/console/stub"
 
 pkg.cflags: -DWOLFSSL_APACHE_MYNEWT -Wno-error -DWOLFSSL_IGNORE_FILE_WARN
