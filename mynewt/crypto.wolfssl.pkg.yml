@@ -22,6 +22,9 @@ pkg.description: "Description of your package"
 pkg.author: "You <you@you.org>"
 pkg.homepage: "http://your-url.org/"
 pkg.keywords:
-pkg.deps:
+pkg.req_apis:
+    - log
+    - stats
+    - console
 
-pkg.cflags: -DWOLFSSL_APACHE_MYNEWT -Wno-error # -DWOLFSSL_IGNORE_FILE_WARN
+pkg.cflags: -DWOLFSSL_APACHE_MYNEWT -DDEBUG_WOLFSSL -Wno-error # -DWOLFSSL_IGNORE_FILE_WARN

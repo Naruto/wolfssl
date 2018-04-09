@@ -185,8 +185,7 @@
     #include "mcu/mcu_sim.h"
     #endif
     #include "os/os_time.h"
-    // #undef printf
-    // #define printf
+    #include <stdio.h> // TODO: this is use baselibc.
 #else
     #include <stdio.h>
 #endif
