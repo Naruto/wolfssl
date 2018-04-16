@@ -27,4 +27,4 @@ pkg.req_apis:
     - stats
     - console
 
-pkg.cflags: -DWOLFSSL_APACHE_MYNEWT -DDEBUG_WOLFSSL -Wno-error # -DWOLFSSL_IGNORE_FILE_WARN
+pkg.cflags: -DWOLFSSL_APACHE_MYNEWT -DDEBUG_WOLFSSL -DNO_FILESYSTEM -Wno-error # -DWOLFSSL_IGNORE_FILE_WARN

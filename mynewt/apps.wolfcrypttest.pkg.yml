@@ -31,4 +31,4 @@ pkg.deps:
     - "@apache-mynewt-core/sys/log/full"
     - "@apache-mynewt-core/sys/stats/full"
 
-pkg.cflags: -DWOLFSSL_APACHE_MYNEWT -Wno-error -DDEBUG_WOLFSSL -DWOLFSSL_IGNORE_FILE_WARN
+pkg.cflags: -DWOLFSSL_APACHE_MYNEWT -Wno-error -DDEBUG_WOLFSSL -DNO_FILESYSTEM -DWOLFSSL_IGNORE_FILE_WARN

@@ -1204,11 +1204,6 @@ extern void uITRON4_free(void *p) ;
     #endif
     #define NO_WRITEV
     #define WOLFSSL_USER_IO
-    #ifndef HAVE_FILESYSTEM
-        #ifndef NO_FILESYSTEM
-            #define NO_FILESYSTEM
-        #endif
-    #endif
     #define SINGLE_THREADED
     #define NO_DEV_RANDOM
     #define NO_FILESYSTEM
