@@ -20,11 +20,9 @@
  */
 #ifndef NO_FILESYSTEM
 #include "fs/fs.h"
-
-typedef struct file FILE
+#define FILE struct fs_file
 #else
-typedef void FILE /* dummy */
-
+#define FILE void /* dummy */
 #endif /* NO_FILESYSTEM*/
 
 FILE* mynewt_fopen(const char * restrict path, const char * restrict mode)
@@ -32,7 +30,7 @@ FILE* mynewt_fopen(const char * restrict path, const char * restrict mode)
 #ifndef NO_FILESYSTEM
     FILE *file;
     uint8_t access_flags = 0;
-    char *p = mode;
+    const char *p = mode;
     while(*p != '\0') {
         switch(*p) {
             case 'r':
@@ -82,20 +80,20 @@ int mynewt_fseek(FILE *stream, long offset, int whence)
     uint32_t fs_offset;
 
     switch(whence) {
-        case SEEK_SET:
+        case 0: /* SEEK_SET */
         {
             fs_offset += offset;
         }
         break;
 
-        case SEEK_CUR:
+        case 1: /* SEEK_CUR */
         {
             fs_offset = fs_getpos(stream);
             fs_offset += offset;
         }
         break;
 
-        case SEEK_END:
+        case 2: /* SEEK_END */
         {
             fs_filelen(stream, &fs_offset);
             fs_offset += offset;
@@ -103,7 +101,7 @@ int mynewt_fseek(FILE *stream, long offset, int whence)
         break;
     }
 
-    fs_seek(stream, fs_oofset);
+    fs_seek(stream, fs_offset);
 
     return 0;
 #else
@@ -134,13 +132,13 @@ size_t mynewt_fread(void *restrict ptr, size_t size, size_t nitems, FILE *restri
 {
 #ifndef NO_FILESYSTEM
     size_t to_read = size * nitems;
-    size_t read_size;
-    int rc = fs_read(stream, to_read, ptr, &read_size)
+    uint32_t read_size;
+    int rc = fs_read(stream, to_read, ptr, &read_size);
     if(rc != 0) {
         return 0;
     }
 
-    return read_size;
+    return (size_t)read_size;
 #else
     return 0;
 #endif

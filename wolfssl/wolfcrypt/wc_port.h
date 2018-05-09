@@ -274,7 +274,19 @@ WOLFSSL_API int wolfCrypt_Cleanup(void);
     #define XBADFILE   NULL
     #define XFGETS(b,s,f) -2 /* Not ported yet */
 #elif defined(WOLFSSL_APACHE_MYNEWT)
-   
+    #include <fs/fs.h>
+
+    #define XFILE      struct fs_file
+    #define XFOPEN     mynewt_fopen
+    #define XFSEEK     mynewt_fseek
+    #define XFTELL     mynewt_ftell
+    #define XREWIND    mynewt_rewind
+    #define XFREAD     mynewt_fread
+    #define XFWRITE    mynewt_fwrite
+    #define XFCLOSE    mynewt_fclose
+    #define XSEEK_END  2
+    #define XBADFILE   NULL
+    #define XFGETS(b,s,f) -2 /* Not ported yet */     
 #else
     /* stdio, default case */
     #include <stdio.h>

@@ -50,6 +50,8 @@ echo "deploy wolfssl sources to crypto/wolfssl"
 /bin/mkdir -p $MYNEWT_PROJECT/crypto/wolfssl/src/wolfcrypt/src
 /bin/cp ./wolfcrypt/src/*.asm $MYNEWT_PROJECT/crypto/wolfssl/src/wolfcrypt/src
 /bin/cp ./wolfcrypt/src/*.c $MYNEWT_PROJECT/crypto/wolfssl/src/wolfcrypt/src
+/bin/mkdir -p $MYNEWT_PROJECT/crypto/wolfssl/src/wolfcrypt/src/port/mynewt
+/bin/cp ./wolfcrypt/src/port/mynewt/* $MYNEWT_PROJECT/crypto/wolfssl/src/wolfcrypt/src/port/mynewt
 
 /bin/mkdir -p $MYNEWT_PROJECT/crypto/wolfssl/include/wolfssl
 /bin/cp -r wolfssl/* $MYNEWT_PROJECT/crypto/wolfssl/include/wolfssl/
