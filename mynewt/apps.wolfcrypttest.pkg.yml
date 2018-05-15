@@ -25,10 +25,7 @@ pkg.homepage: "http://your-url.org/"
 pkg.keywords:
 pkg.deps:
     - crypto/wolfssl
-    - "@apache-mynewt-core/libc/baselibc"
     - "@apache-mynewt-core/kernel/os"
     - "@apache-mynewt-core/sys/console/full"
-    - "@apache-mynewt-core/sys/log/full"
-    - "@apache-mynewt-core/sys/stats/full"
 
-pkg.cflags: -DWOLFSSL_APACHE_MYNEWT -Wno-error -DDEBUG_WOLFSSL -DNO_FILESYSTEM -DWOLFSSL_IGNORE_FILE_WARN
+pkg.cflags: -DWOLFSSL_APACHE_MYNEWT -Wno-error -DNO_FILESYSTEM -DWOLFSSL_IGNORE_FILE_WARN
