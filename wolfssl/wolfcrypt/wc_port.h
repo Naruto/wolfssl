@@ -275,8 +275,8 @@ WOLFSSL_API int wolfCrypt_Cleanup(void);
     #define XFGETS(b,s,f) -2 /* Not ported yet */
 #elif defined(WOLFSSL_APACHE_MYNEWT)
     #include <fs/fs.h>
+    #define XFILE  struct fs_file*
 
-    #define XFILE      struct fs_file
     #define XFOPEN     mynewt_fopen
     #define XFSEEK     mynewt_fseek
     #define XFTELL     mynewt_ftell

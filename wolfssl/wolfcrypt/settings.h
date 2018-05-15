@@ -1206,7 +1206,6 @@ extern void uITRON4_free(void *p) ;
     #define WOLFSSL_USER_IO
     #define SINGLE_THREADED
     #define NO_DEV_RANDOM
-    #define NO_FILESYSTEM
     #define NO_DH
     #define NO_WOLFSSL_DIR
     #define NO_ERROR_STRINGS
