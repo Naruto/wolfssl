@@ -21,13 +21,9 @@
 #ifndef NO_FILESYSTEM
 #include "fs/fs.h"
 #define FILE struct fs_file
-#else
-#define FILE void /* dummy */
-#endif /* NO_FILESYSTEM*/
 
 FILE* mynewt_fopen(const char * restrict path, const char * restrict mode)
 {
-#ifndef NO_FILESYSTEM
     FILE *file;
     uint8_t access_flags = 0;
     const char *p = mode;
@@ -69,14 +65,10 @@ FILE* mynewt_fopen(const char * restrict path, const char * restrict mode)
         return NULL;
     }
     return file;
-#else
-    return NULL;
-#endif
 }
 
 int mynewt_fseek(FILE *stream, long offset, int whence)
 {
-#ifndef NO_FILESYSTEM
     uint32_t fs_offset;
 
     switch(whence) {
@@ -104,33 +96,23 @@ int mynewt_fseek(FILE *stream, long offset, int whence)
     fs_seek(stream, fs_offset);
 
     return 0;
-#else
-    return -1;
-#endif
 }
 
 long mynewt_ftell(FILE *stream)
 {
-#ifndef NO_FILESYSTEM
     uint32_t fs_offset;
     fs_filelen(stream, &fs_offset);
     fs_seek(stream, fs_offset);
     return (long)fs_offset;
-#else
-    return -1;
-#endif
 }
 
 void mynewt_rewind(FILE *stream)
 {
-#ifndef NO_FILESYSTEM
     fs_seek(stream, 0);
-#endif
 }
 
 size_t mynewt_fread(void *restrict ptr, size_t size, size_t nitems, FILE *restrict stream)
 {
-#ifndef NO_FILESYSTEM
     size_t to_read = size * nitems;
     uint32_t read_size;
     int rc = fs_read(stream, to_read, ptr, &read_size);
@@ -139,14 +121,10 @@ size_t mynewt_fread(void *restrict ptr, size_t size, size_t nitems, FILE *restri
     }
 
     return (size_t)read_size;
-#else
-    return 0;
-#endif
 }
 
 size_t mynewt_fwrite(const void *restrict ptr, size_t size, size_t nitems, FILE *restrict stream)
 {
-#ifndef NO_FILESYSTEM
     size_t to_write = size * nitems;
     size_t write_size;
     int rc = fs_write(stream, ptr, to_write);
@@ -155,20 +133,15 @@ size_t mynewt_fwrite(const void *restrict ptr, size_t size, size_t nitems, FILE 
     }
 
     return to_write;
-#else
-    return 0;
-#endif
 }
 
 int mynewt_fclose(FILE *stream)
 {
-#ifndef NO_FILESYSTEM
     fs_close(stream);
     return 0;
-#else
-    return 128; /* TODO */
-#endif
 }
 
 // XSEEK_END  FS_SEEK_END
 // XBADFILE   NULL
+#endif /* NO_FILESYSTEM*/
+
