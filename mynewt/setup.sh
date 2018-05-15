@@ -73,10 +73,10 @@ echo "deploy yml files to targets/wolfcrypttest_sim"
 /bin/cp mynewt/targets.wolfcrypttest_sim.pkg.yml $MYNEWT_PROJECT/targets/wolfcrypttest_sim/pkg.yml
 /bin/cp mynewt/targets.wolfcrypttest_sim.target.yml $MYNEWT_PROJECT/targets/wolfcrypttest_sim/target.yml
 
-popd > /dev/null # $BASEDIR
+## deploy certs files
+#echo "deploy certs files"
+#/bin/rm -rf $MYNEWT_PROJECT/certs
+#/bin/mkdir -p $MYNEWT_PROJECT/certs
+#/bin/cp -r certs/ $MYNEWT_PROJECT/certs
 
-#ARDUINO_DIR=${PWD}
-#cd ../../
-#rm bio.c
-#rm evp.c
-#cd $ARDUINO_DIR
+popd > /dev/null # $BASEDIR
