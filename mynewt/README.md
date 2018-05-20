@@ -55,10 +55,19 @@ please confirm with the `cat /dev/ttys00X` command etc.
 
 ## build & test
 
-build
+prepare (execute at only once)
 
 ```
 cd /path/to/myproject_path
+newt target create wolfcrypttest_sim
+newt target set wolfcrypttest_sim app=apps/wolfcrypttest
+newt target set wolfcrypttest_sim bsp=@apache-mynewt-core/hw/bsp/native
+newt target set wolfcrypttest_sim build_profile=debug
+```
+
+build
+
+```
 newt clean wolfcrypttest_sim
 newt build wolfcrypttest_sim
 ```

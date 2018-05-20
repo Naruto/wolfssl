@@ -66,13 +66,6 @@ echo "deploy unit test sources to apps/wolfcrypttest"
 /bin/mkdir -p $MYNEWT_PROJECT/apps/wolfcrypttest/src
 /bin/cp wolfcrypt/test/test.c $MYNEWT_PROJECT/apps/wolfcrypttest/src/main.c
 
-# deploy to targets/wolfcrypttest_sim
-echo "deploy yml files to targets/wolfcrypttest_sim"
-/bin/rm -rf $MYNEWT_PROJECT/targets/wolfcrypttest_sim
-/bin/mkdir -p $MYNEWT_PROJECT/targets/wolfcrypttest_sim
-/bin/cp mynewt/targets.wolfcrypttest_sim.pkg.yml $MYNEWT_PROJECT/targets/wolfcrypttest_sim/pkg.yml
-/bin/cp mynewt/targets.wolfcrypttest_sim.target.yml $MYNEWT_PROJECT/targets/wolfcrypttest_sim/target.yml
-
 ## deploy certs files
 #echo "deploy certs files"
 #/bin/rm -rf $MYNEWT_PROJECT/certs
