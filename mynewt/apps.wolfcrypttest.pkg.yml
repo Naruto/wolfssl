@@ -28,4 +28,4 @@ pkg.deps:
     - "@apache-mynewt-core/kernel/os"
     - "@apache-mynewt-core/sys/console/full"
 
-pkg.cflags: -DWOLFSSL_APACHE_MYNEWT -Wno-error -DNO_FILESYSTEM -DWOLFSSL_IGNORE_FILE_WARN
+pkg.cflags: -DWOLFSSL_APACHE_MYNEWT -Icrypto/wolfssl/src -Wno-error -DNO_FILESYSTEM -DWOLFSSL_IGNORE_FILE_WARN
