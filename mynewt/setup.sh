@@ -21,6 +21,7 @@ fi
 
 # create wolfssl pkgs to mynewt project
 pushd $MYNEWT_PROJECT > /dev/null
+
 echo "create crypto/wolfssl pkg"
 /bin/rm -rf crypto/wolfssl
 newt pkg new crypto/wolfssl
@@ -35,13 +36,21 @@ newt pkg new -t app apps/wolfcrypttest
 /bin/rm -rf apps/wolfcrypttest/include 
 /bin/rm -rf apps/wolfcrypttest/src
 /bin/mkdir -p apps/wolfcrypttest/src
+
+echo "create apps/wolfsslttest pkg"
+/bin/rm -rf apps/wolfssltest
+newt pkg new -t app apps/wolfssltest
+/bin/rm -rf apps/wolfssltest/include 
+/bin/rm -rf apps/wolfssltest/src
+/bin/mkdir -p apps/wolfssltest/src
+
 popd > /dev/null # $MYNEWT_PROJECT
 
 # deploy source files and pkg
 pushd $BASEDIR > /dev/null
 
-# deploy to crypto/wolfssl
-echo "deploy wolfssl sources to crypto/wolfssl"
+# deploy wolfcrypt and wolfssl sources to crypto/wolfssl
+echo "deploy wolfcrypt and wolfssl sources to crypto/wolfssl"
 /bin/cp ./mynewt/crypto.wolfssl.pkg.yml $MYNEWT_PROJECT/crypto/wolfssl/pkg.yml
 
 /bin/mkdir -p $MYNEWT_PROJECT/crypto/wolfssl/src/src
@@ -56,8 +65,8 @@ echo "deploy wolfssl sources to crypto/wolfssl"
 /bin/mkdir -p $MYNEWT_PROJECT/crypto/wolfssl/include/wolfssl
 /bin/cp -r wolfssl/* $MYNEWT_PROJECT/crypto/wolfssl/include/wolfssl/
 
-# deploy to apps/wolfcrypttest
-echo "deploy unit test sources to apps/wolfcrypttest"
+# deploy wolfcrypt test to apps/wolfcrypttest
+echo "deploy wolfcrypt test sources to apps/wolfcrypttest"
 /bin/cp ./mynewt/apps.wolfcrypttest.pkg.yml $MYNEWT_PROJECT/apps/wolfcrypttest/pkg.yml
 
 /bin/mkdir -p $MYNEWT_PROJECT/apps/wolfcrypttest/include/wolfcrypt/test
@@ -65,6 +74,22 @@ echo "deploy unit test sources to apps/wolfcrypttest"
 
 /bin/mkdir -p $MYNEWT_PROJECT/apps/wolfcrypttest/src
 /bin/cp wolfcrypt/test/test.c $MYNEWT_PROJECT/apps/wolfcrypttest/src/main.c
+
+# deploy wolfssl test to apps/wolfsslunittest
+echo "deploy wolfssl test sources to apps/wolfssltest"
+/bin/cp ./mynewt/apps.wolfssltest.pkg.yml $MYNEWT_PROJECT/apps/wolfssltest/pkg.yml
+/bin/mkdir -p $MYNEWT_PROJECT/apps/wolfssltest/src
+
+/bin/mkdir -p $MYNEWT_PROJECT/apps/wolfssltest/include/
+/bin/cp -r cyassl $MYNEWT_PROJECT/apps/wolfssltest/include/
+/bin/mkdir -p $MYNEWT_PROJECT/apps/wolfssltest/include/tests
+/bin/cp -r tests/unit.h $MYNEWT_PROJECT/apps/wolfssltest/include/tests
+
+WOLFSSL_TEST_SRCS="tests/unit.c tests/api.c tests/suites.c tests/hash.c tests/srp.c examples/client/client.c examples/server/server.c"
+for src in $WOLFSSL_TEST_SRCS
+do
+    /bin/cp $src $MYNEWT_PROJECT/apps/wolfssltest/src/
+done
 
 ## deploy certs files
 #echo "deploy certs files"

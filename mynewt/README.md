@@ -53,17 +53,34 @@ pkg.cflags: -DWOLFSSL_APACHE_MYNEWT ... -DDEBUG_WOLFSSL
 When it executes `wolfcrypttest.elf`, display tty device for output display devices.
 please confirm with the `cat /dev/ttys00X` command etc.
 
-## build & test
+## prepare
 
 prepare (execute at only once)
 
+### wolfcrypttest
+
 ```
 cd /path/to/myproject_path
+newt target delete wolfcrypttest_sim
 newt target create wolfcrypttest_sim
 newt target set wolfcrypttest_sim app=apps/wolfcrypttest
 newt target set wolfcrypttest_sim bsp=@apache-mynewt-core/hw/bsp/native
 newt target set wolfcrypttest_sim build_profile=debug
 ```
+
+### wolfssltest
+
+```
+cd /path/to/myproject_path
+newt target delete wolfssltest_sim
+newt target create wolfssltest_sim
+newt target set wolfssltest_sim app=apps/wolfssltest
+newt target set wolfssltest_sim bsp=@apache-mynewt-core/hw/bsp/native
+newt target set wolfssltest_sim build_profile=debug
+```
+
+
+## build & test
 
 build
 
